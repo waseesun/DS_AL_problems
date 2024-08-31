@@ -29,4 +29,19 @@ class Solution:
                 curr_l.next = ListNode(carry)
                 curr_l = curr_l.next
 
+        curr_l = sum_l
+        while curr_l != None:
+            print(curr_l.val)
+            curr_l = curr_l.next
         return sum_l
+    
+    
+if __name__ == '__main__':
+    l1 = ListNode(2)
+    l1.next = ListNode(4)
+    l1.next.next = ListNode(3)
+    l2 = ListNode(5)
+    l2.next = ListNode(6)
+    l2.next.next = ListNode(4)
+    sol = Solution()
+    print(sol.addTwoNumbers(l1, l2))
