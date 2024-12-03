@@ -1,32 +1,26 @@
 class Solution:
     def threeSum(self, nums):
-        nums.sort()  # Sort the list first
-        lst = []  # List to store the triplets
+        nums.sort()
+        result = []
+        def backtrack(r, l, combo):
+            if r == 3:
+                r_sum = sum(combo)
+                if r_sum == 0:
+                    combo = [combo[0], combo[1], combo[2]]
+                    if combo not in result:
+                        result.append(combo)
+                return
 
-        for i in range(len(nums) - 2):
-            if i > 0 and nums[i] == nums[i - 1]:
-                # Skip duplicates
-                continue
+            for i in range(l, len(nums)):
+                l += 1
+                combo.append(nums[i])
+                backtrack(r+1, l, combo)
+                combo.pop()
 
-            left, right = i + 1, len(nums) - 1
-            while left < right:
-                total = nums[i] + nums[left] + nums[right]
 
-                if total == 0:
-                    lst.append([nums[i], nums[left], nums[right]])
-                    # Move the pointers to skip duplicates
-                    while left < right and nums[left] == nums[left + 1]:
-                        left += 1
-                    while left < right and nums[right] == nums[right - 1]:
-                        right -= 1
-                    left += 1
-                    right -= 1
-                elif total < 0:
-                    left += 1
-                else:
-                    right -= 1
+        backtrack(0, 0, [])
 
-        return lst
+        return result
 
 
 if __name__ == '__main__':
